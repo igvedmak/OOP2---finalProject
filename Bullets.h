@@ -2,9 +2,10 @@
 #include "Shots.h"
 class Bullets : public Shots
 {
-public:
-	Bullets(sf::Vector2f place) : Shots(place){}
-	virtual ~Bullets() {}
-	virtual void setBulletPosition(sf::Vector2f position, Direction dir) = 0;
+	explicit Bullets(const sf::Vector2f& position, const sf::Texture &t);
+	Bullets(const Bullets&) = delete;//copy c-tor (lvalue)
+	Bullets& operator=(const Bullets&) = delete; //assignment operator (lvalue)
+	Bullets(Bullets&&) = default;//move copy c-tor (rvalue)
+	Bullets& operator=(Bullets&&) = delete;//move assigment operator (rvalue)
 };
 

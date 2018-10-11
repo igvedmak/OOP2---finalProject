@@ -1,17 +1,9 @@
 #include "Coins.h"
 
+bool Coins::m_registerit = SpawnManager<char, Pickup>::registerit(COIN_C, [](const sf::Vector2f& pos) -> std::unique_ptr<Pickup> { return std::make_unique<Coins>(pos, Source::instance().getCoinTexture()); });
 
-// Constructor which use base class constructor and do intRect to the relvant texture
-Coins::Coins(sf::Vector2f place)
-	:Treasure(place)
-{
-	//m_sprite.setTextureRect(sf::IntRect(DEATH_COL * STATIC_SIZE, 0, STATIC_SIZE, STATIC_SIZE));
-	m_sprite.setPosition(place.x * STATIC_SIZE, place.y * STATIC_SIZE);
+Coins::Coins(const sf::Vector2f& position, const sf::Texture &t)
+	: Treasure(position, t){
+	m_sprite.setTextureRect(sf::IntRect(0, 0, 30, 30));
+	m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2.f, m_sprite.getGlobalBounds().height / 2.f);
 }
-
-// Function which check collision of sfml : intersect of this class object eith obj she get 
-bool Coins::isCollide(Object & obj)
-{
-	return m_sprite.getGlobalBounds().intersects(obj.getSprite().getGlobalBounds());
-}
-

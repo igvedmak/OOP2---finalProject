@@ -3,6 +3,7 @@
 //-----------------------Main Functions------------------------------------
 int main() try
 {
+	srand((unsigned int)time(NULL));
 	GameManager game;    
 	game.run();                   // run the editor program
 	return(EXIT_SUCCESS);	

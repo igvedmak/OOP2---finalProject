@@ -6,7 +6,7 @@ bool MenuState::m_registerit = SpawnManager<States, GameState>::registerit(State
 MenuState::MenuState(const sf::Vector2f& coords, const sf::Texture& texture)
 	:GameState(coords, texture), m_selected(0), m_mute(MuteButton(mutePos, Source::instance().getMuteTexture()))
 {
-	m_sprite.setScale(1.66f, 1.8f);
+	m_sprite.setScale(scaleWidth, scaleHeigth);
 	if (!bufferSwitch.loadFromFile(switchBuffer))
 		throw std::exception(CANTOPEN);
 	soundSwitch.setBuffer(bufferSwitch);
@@ -37,7 +37,7 @@ void MenuState::handleEvent(GameManager& controller){
 		switch (event.type)
 		{
 		case sf::Event::Closed:
-			//controller.saveScoresToFile();        // save all the current scores at the map to the file
+			controller.saveScoresToFile();        // save all the current scores at the map to the file
 			controller.popState();                // pop the menu state from stack at the controller
 			return;
 
@@ -69,9 +69,11 @@ void MenuState::handleEvent(GameManager& controller){
 				switch (m_selected)
 				{
 				case PLAY:            // play state
-					//Resource::instance().initCurrentLevel();
-					if (!m_mute.getOnOff())
-						Source::instance().getStageMusic().play();
+					Source::instance().initCurrentLevel();
+					if (!m_mute.getOnOff()) {
+						Source::instance().getStageMusicLvl1().play();
+					}
+
 					//Source::instance().setMuted(m_mute.getOnOff());
 					Source::instance().getMenuMusic().stop();
 					controller.changeState(PLAY);
@@ -83,7 +85,7 @@ void MenuState::handleEvent(GameManager& controller){
 					controller.changeState(INTRO);
 					break;
 				case EXIT:           // exit state
-					/*controller.saveScoresToFile();*/
+					controller.saveScoresToFile();
 					controller.popState();
 					break;
 				default:

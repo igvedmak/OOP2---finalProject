@@ -3,9 +3,12 @@
 class HealthPotion : public Potion
 {
 public:
-	HealthPotion(sf::Vector2f place);
-	void draw(sf::RenderWindow &window) { window.draw(m_sprite); }
-	bool isCollide(Object & obj);
-	virtual ~HealthPotion() {}
+	explicit HealthPotion(const sf::Vector2f& position, const sf::Texture &t);
+	HealthPotion(const HealthPotion&) = delete;//copy c-tor (lvalue)
+	HealthPotion& operator=(const HealthPotion&) = delete; //assignment operator (lvalue)
+	HealthPotion(HealthPotion&&) = default;//move copy c-tor (rvalue)
+	HealthPotion& operator=(HealthPotion&&) = delete;//move assigment operator (rvalue)
+private:
+	static bool m_registerit;
 };
 

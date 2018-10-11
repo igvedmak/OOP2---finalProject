@@ -11,8 +11,13 @@ public:
 
 	void displayState(GameManager& controller);
 	void handleEvent(GameManager& controller);
+	void updateStage() {}
 
 private:
 	static bool m_registerit;
+	sf::Text m_title;
+	sf::Text m_player;
+	sf::Text m_scores;
+	sf::Text m_main;
 };
 

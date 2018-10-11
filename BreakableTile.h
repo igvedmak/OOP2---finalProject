@@ -3,9 +3,13 @@
 class BreakableTile : public Obstacle
 {
 public:
-	BreakableTile(sf::Vector2f place);
-	bool isCollide(Object & obj);
-	void draw(sf::RenderWindow &window) { window.draw(m_sprite); }
-	virtual ~BreakableTile() {}
+	explicit BreakableTile(const sf::Vector2f& position, const sf::Texture &t);
+	BreakableTile(const BreakableTile&) = delete;//copy c-tor (lvalue)
+	BreakableTile& operator=(const BreakableTile&) = delete; //assignment operator (lvalue)
+	BreakableTile(BreakableTile&&) = default;//move copy c-tor (rvalue)
+	BreakableTile& operator=(BreakableTile&&) = delete;//move assigment operator (rvalue)
+
+private:
+	static bool m_registerit;
 };
 

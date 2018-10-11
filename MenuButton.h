@@ -43,7 +43,8 @@ class PlayButton
 	: public MenuButton
 {
 public:
-	explicit PlayButton(const sf::Vector2f& coords, const sf::Texture& m_texture, const std::string& str) : MenuButton(coords,m_texture,str)
+	explicit PlayButton(const sf::Vector2f& coords, const sf::Texture& m_texture, const std::string& str) 
+		: MenuButton(coords,m_texture,str)
 	{
 	}
 };
@@ -52,7 +53,8 @@ class ScoreButton
 	: public MenuButton
 {
 public:
-	explicit ScoreButton(const sf::Vector2f& coords, const sf::Texture& m_texture, const std::string& str) : MenuButton(coords, m_texture,str)
+	explicit ScoreButton(const sf::Vector2f& coords, const sf::Texture& m_texture, const std::string& str) 
+		: MenuButton(coords, m_texture,str)
 	{
 	}
 };
@@ -61,7 +63,8 @@ class ExitButton
 	: public MenuButton
 {
 public:
-	explicit ExitButton(const sf::Vector2f& coords, const sf::Texture& m_texture, const std::string& str) : MenuButton(coords, m_texture,str)
+	explicit ExitButton(const sf::Vector2f& coords, const sf::Texture& m_texture, const std::string& str) 
+		: MenuButton(coords, m_texture,str)
 	{
 	}
 };
@@ -70,7 +73,8 @@ class InstructionButton
 	: public MenuButton
 {
 public:
-	explicit InstructionButton(const sf::Vector2f& coords, const sf::Texture& m_texture, const std::string& str) : MenuButton(coords, m_texture, str)
+	explicit InstructionButton(const sf::Vector2f& coords, const sf::Texture& m_texture, const std::string& str) 
+		: MenuButton(coords, m_texture, str)
 	{
 	}
 };
@@ -84,8 +88,7 @@ class MuteButton :
 {
 public:
 	explicit MuteButton(const sf::Vector2f& coords, const sf::Texture& m_texture)
-		: MenuButton(coords, m_texture, ""), m_on(false)
-	{
+		: MenuButton(coords, m_texture, Quotation), m_on(false){
 		m_sprite.setTextureRect(sf::IntRect(UNMUTE.x, UNMUTE.y, 50, 50));
 	}
 	MuteButton(const MuteButton&) = delete;//copy c-tor (lvalue)

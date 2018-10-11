@@ -3,15 +3,13 @@
 class EnemyBullet : public Bullets
 {
 public:
-	EnemyBullet(sf::Vector2f place) : Bullets(place) {}
-	void move(const Direction dir, float deltaTime) {}
-	void setPosition(sf::Vector2f position) {}
-	void setBulletPosition(sf::Vector2f position, Direction dir);
-	void setNextDir(Direction dir) { m_nextDir = dir; }
-	Direction getNextDir() const { return m_nextDir; }
-	virtual ~EnemyBullet() {}
+	explicit EnemyBullet(const sf::Vector2f& position, const sf::Texture &t);
+	EnemyBullet(const EnemyBullet&) = delete;//copy c-tor (lvalue)
+	EnemyBullet& operator=(const EnemyBullet&) = delete; //assignment operator (lvalue)
+	EnemyBullet(EnemyBullet&&) = default;//move copy c-tor (rvalue)
+	EnemyBullet& operator=(EnemyBullet&&) = delete;//move assigment operator (rvalue)
 
 private:
-	Direction m_dir;
+	static bool m_registerit;
 };
 

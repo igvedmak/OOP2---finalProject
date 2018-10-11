@@ -1,9 +1,14 @@
 #pragma once
 #include "StaticObject.h"
-class Obstacle : public StaticObject
+#include "Constants.h"
+
+class Obstacle :
+	public StaticObject
 {
 public:
-	Obstacle(sf::Vector2f place);
-	virtual void draw(sf::RenderWindow &window) = 0;
-	virtual ~Obstacle() {}
+	explicit Obstacle(const sf::Vector2f& position, const sf::Texture &t);
+	Obstacle(const Obstacle&) = delete;//copy c-tor (lvalue)
+	Obstacle& operator=(const Obstacle&) = delete; //assignment operator (lvalue)
+	Obstacle(Obstacle&&) = default;//move copy c-tor (rvalue)
+	Obstacle& operator=(Obstacle&&) = delete;//move assigment operator (rvalue)
 };

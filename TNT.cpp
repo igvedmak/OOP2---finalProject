@@ -1,12 +1,4 @@
 #include "TNT.h"
 
-
-
-TNT::TNT(sf::Vector2f place) : Shots(place)
-{
-}
-
-
-TNT::~TNT()
-{
-}
+TNT::TNT(const sf::Vector2f& position, const sf::Texture &t)
+	: Shots(position, t) {}

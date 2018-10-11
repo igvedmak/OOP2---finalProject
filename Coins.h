@@ -3,9 +3,13 @@
 class Coins : public Treasure
 {
 public:
-	Coins(sf::Vector2f place);
-	void draw(sf::RenderWindow &window) { window.draw(m_sprite); }
-	bool isCollide(Object & obj);
-	virtual ~Coins() {}
+	explicit Coins(const sf::Vector2f& position, const sf::Texture &t);
+	Coins(const Coins&) = delete;//copy c-tor (lvalue)
+	Coins& operator=(const Coins&) = delete; //assignment operator (lvalue)
+	Coins(Coins&&) = default;//move copy c-tor (rvalue)
+	Coins& operator=(Coins&&) = delete;//move assigment operator (rvalue)
+
+private:
+	static bool m_registerit;
 };
 

@@ -3,9 +3,13 @@
 class Fire : public Obstacle
 {
 public:
-	Fire(sf::Vector2f place);
-	bool isCollide(Object & obj);
-	void draw(sf::RenderWindow &window) { window.draw(m_sprite); }
-	virtual ~Fire() {}
+	explicit Fire(const sf::Vector2f& position, const sf::Texture &t);
+	Fire(const Fire&) = delete;//copy c-tor (lvalue)
+	Fire& operator=(const Fire&) = delete; //assignment operator (lvalue)
+	Fire(Fire&&) = default;//move copy c-tor (rvalue)
+	Fire& operator=(Fire&&) = delete;//move assigment operator (rvalue)
+
+private:
+	static bool m_registerit;
 };
 

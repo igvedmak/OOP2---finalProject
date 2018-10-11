@@ -1,12 +1,4 @@
 #include "SpecialSword.h"
 
-
-
-SpecialSword::SpecialSword(sf::Vector2f place): Shots(place)
-{
-}
-
-
-SpecialSword::~SpecialSword()
-{
-}
+SpecialSword::SpecialSword(const sf::Vector2f& position, const sf::Texture &t) 
+	: Shots(position, t), typesword(REGULARSWORD) {}

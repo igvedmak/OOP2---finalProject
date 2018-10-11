@@ -12,7 +12,10 @@ public:
 
 	void displayState(GameManager& controller);
 	void handleEvent(GameManager& controller);
+
 private:
+	const int COLOR = 255;                // range for colors
+	sf::Text m_text1, m_text2;
 	static bool m_registerit;
 };
 

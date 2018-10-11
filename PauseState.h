@@ -13,5 +13,6 @@ public:
 	void handleEvent(GameManager& controller);
 private:
 	static bool m_registerit;
+	sf::Text m_title;
 };
 

@@ -1,14 +1,10 @@
 #include "Spkies.h"
+bool Spkies::m_registerit = SpawnManager<char, StaticObject>::registerit(SPIKES_C, [](const sf::Vector2f& pos) -> std::unique_ptr<StaticObject> { return std::make_unique<Spkies>(pos, Source::instance().getSpkiesTexture()); });
+bool Spkies::m_registerit1 = SpawnManager<char, StaticObject>::registerit(SPIKES1_C, [](const sf::Vector2f& pos) -> std::unique_ptr<StaticObject> { return std::make_unique<Spkies>(pos, Source::instance().getSpkies1Texture()); });
+bool Spkies::m_registerit2 = SpawnManager<char, StaticObject>::registerit(SPIKES2_C, [](const sf::Vector2f& pos) -> std::unique_ptr<StaticObject> { return std::make_unique<Spkies>(pos, Source::instance().getSpkies2Texture()); });
+bool Spkies::m_registerit3 = SpawnManager<char, StaticObject>::registerit(SPIKES3_C, [](const sf::Vector2f& pos) -> std::unique_ptr<StaticObject> { return std::make_unique<Spkies>(pos, Source::instance().getSpkies3Texture()); });
+bool Spkies::m_registerit4 = SpawnManager<char, StaticObject>::registerit(SPIKES4_C, [](const sf::Vector2f& pos) -> std::unique_ptr<StaticObject> { return std::make_unique<Spkies>(pos, Source::instance().getSpkies4Texture()); });
+bool Spkies::m_registerit5 = SpawnManager<char, StaticObject>::registerit(SPIKES5_C, [](const sf::Vector2f& pos) -> std::unique_ptr<StaticObject> { return std::make_unique<Spkies>(pos, Source::instance().getSpkies5Texture()); });
 
-// Constructor which use base class constructor and do intRect to the relvant texture
-Spkies::Spkies(sf::Vector2f place)
-	: Obstacle(place)
-{
-	//m_sprite.setTextureRect(sf::IntRect(BREAKABLE_X * STATIC_SIZE, BREAKABLE_Y * STATIC_SIZE, STATIC_SIZE, STATIC_SIZE));
-	//m_sprite.setPosition(place.x * STATIC_SIZE, place.y * STATIC_SIZE);
-}
-
-// Function which check collision of sfml : intersect of this class object eith obj she get 
-bool Spkies::isCollide(Object & obj){
-	return m_sprite.getGlobalBounds().intersects(obj.getSprite().getGlobalBounds());
-}
+Spkies::Spkies(const sf::Vector2f& position, const sf::Texture &t) 
+	: Obstacle(position, t){}

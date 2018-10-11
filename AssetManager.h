@@ -1,5 +1,10 @@
 #pragma once
-#include "Constants.h"
+#include <memory>
+#include <map>
+#include <cassert>
+#include <stdexcept>
+#include <string>
+
 template <typename Asset, typename Identifier>
 class AssetManager
 {
@@ -11,6 +16,9 @@ public:
 	void load(Identifier id, const std::string & filename, const Parameter & secondParam);
 	Asset & get(Identifier id);
 	const Asset & get(Identifier id) const;
+	void open(Identifier id, const std::string & filename);
+	template <typename Parameter>
+	void open(Identifier id, const std::string & filename, const Parameter & secondParam);
 };
 
 template<typename Asset, typename Identifier>
@@ -18,7 +26,7 @@ void AssetManager<Asset, Identifier>::load(Identifier id, const std::string & fi
 {
 	std::unique_ptr<Asset> asset(new Asset());
 	if (!asset->loadFromFile(filename))
-		throw std::runtime_error("Failed to load " + filename);
+		throw std::runtime_error(CANTLOAD + filename);
 	auto inserted = m_assetMap.insert(std::make_pair(id, std::move(asset)));
 	assert(inserted.second);
 }
@@ -29,7 +37,28 @@ void AssetManager<Asset, Identifier>::load(Identifier id, const std::string & fi
 {
 	std::unique_ptr<Asset> asset(new Asset());
 	if (!asset->loadFromFile(filename, secondParam))
-		throw std::runtime_error("Failed to load " + filename);
+		throw std::runtime_error(CANTLOAD + filename);
+	auto inserted = m_assetMap.insert(std::make_pair(id, std::move(asset)));
+	assert(inserted.second);
+}
+
+template<typename Asset, typename Identifier>
+void AssetManager<Asset, Identifier>::open(Identifier id, const std::string & filename)
+{
+	std::unique_ptr<Asset> asset(new Asset());
+	if (!asset->openFromFile(filename))
+		throw std::runtime_error(CANTOPENFILE + filename);
+	auto inserted = m_assetMap.insert(std::make_pair(id, std::move(asset)));
+	assert(inserted.second);
+}
+
+template<typename Asset, typename Identifier>
+template<typename Parameter>
+void AssetManager<Asset, Identifier>::open(Identifier id, const std::string & filename, const Parameter & secondParam)
+{
+	std::unique_ptr<Asset> asset(new Asset());
+	if (!asset->openFromFile(filename, secondParam))
+		throw std::runtime_error(CANTOPENFILE + filename);
 	auto inserted = m_assetMap.insert(std::make_pair(id, std::move(asset)));
 	assert(inserted.second);
 }

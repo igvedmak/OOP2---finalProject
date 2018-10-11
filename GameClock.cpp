@@ -1,12 +1,19 @@
 #include "GameClock.h"
 
-
-
-GameClock::GameClock()
-{
+GameClock & GameClock::getInstance() {
+	static GameClock instance;
+	return instance;
 }
 
-
-GameClock::~GameClock()
-{
+bool GameClock::isTimePassed(float time, float seconds) {
+	return m_clock.getElapsedTime().asSeconds() - time > seconds;
 }
+
+float GameClock::getElapsedTime() {
+	return m_clock.getElapsedTime().asSeconds();
+}
+
+GameClock::GameClock(){}
+
+
+GameClock::~GameClock(){}

@@ -3,8 +3,13 @@
 class Treasure : public Pickup
 {
 public:
-	Treasure(sf::Vector2f place) : Pickup(place) {}
-	void draw(sf::RenderWindow &window) { window.draw(m_sprite); }
-	virtual ~Treasure() {}
+	explicit Treasure(const sf::Vector2f& position, const sf::Texture &t);
+	Treasure(const Treasure&) = delete;//copy c-tor (lvalue)
+	Treasure& operator=(const Treasure&) = delete; //assignment operator (lvalue)
+	Treasure(Treasure&&) = default;//move copy c-tor (rvalue)
+	Treasure& operator=(Treasure&&) = delete;//move assigment operator (rvalue)
+
+private:
+	static bool m_registerit;
 };
 

@@ -1,16 +1,6 @@
 #include "Token.h"
 
+bool Token::m_registerit = SpawnManager<char, Pickup>::registerit(REDCROWN_C, [](const sf::Vector2f& pos) -> std::unique_ptr<Pickup> { return std::make_unique<Token>(pos, Source::instance().getRedCrownTexture()); });
 
-// Constructor which use base class constructor and do intRect to the relvant texture
-Token::Token(sf::Vector2f place)
-	:Treasure(place)
-{
-	//m_sprite.setTextureRect(sf::IntRect(DEATH_COL * STATIC_SIZE, 0, STATIC_SIZE, STATIC_SIZE));
-	m_sprite.setPosition(place.x * STATIC_SIZE, place.y * STATIC_SIZE);
-}
-
-// Function which check collision of sfml : intersect of this class object eith obj she get 
-bool Token::isCollide(Object & obj)
-{
-	return m_sprite.getGlobalBounds().intersects(obj.getSprite().getGlobalBounds());
-}
+Token::Token(const sf::Vector2f& position, const sf::Texture &t)
+	: Treasure(position, t){}

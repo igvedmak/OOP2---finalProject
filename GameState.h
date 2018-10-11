@@ -6,13 +6,7 @@ class GameManager;
 class GameState
 {
 public:
-	explicit GameState(const sf::Vector2f& coords, const sf::Texture& texture)
-		:m_texture(texture)
-	{
-		m_texture.setSmooth(true);
-		m_sprite.setTexture(m_texture);
-		m_sprite.setPosition(coords);
-	}
+	explicit GameState(const sf::Vector2f& coords, const sf::Texture& texture);
 	GameState(const GameState&) = delete;//copy c-tor (lvalue)
 	GameState& operator=(const GameState&) = delete;//assigment operator (lvalue)
 	GameState(GameState&&) = default;//move copy c-tor (rvalue)
@@ -26,5 +20,6 @@ public:
 protected:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
+	sf::Sprite m_EnemySprite;
 };
 
